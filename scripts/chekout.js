@@ -1,4 +1,4 @@
-import {calculateCartQuantity, cart,removeFromCart, updateQuantity} from '../data/cart.js';
+import {calculateCartQuantity, cart,removeFromCart, updateDeliveryOption, updateQuantity} from '../data/cart.js';
 import {products} from '../data/products.js';
 import formatCurrency from './utils/money.js';
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
@@ -65,7 +65,7 @@ cart.forEach((cartItem)=>{
             </div>
             </div>
 
-            <div class="delivery-options">
+            <div class="delivery-options js-delivery-option">
                 <div class="delivery-options-title">
                     Choose a delivery option:
                 </div>
@@ -86,7 +86,9 @@ function deliveryOptionsHTML(matchingProduct,cartItem)
         const priceString=deliveryOption.priceCents===0?'FREE':`$${formatCurrency(deliveryOption.priceCents)} -`;
         const isChecked=deliveryOption.id===cartItem.deliveryOptionId;
 
-        html+=`<div class="delivery-option">
+        html+=`<div class="delivery-option js-delivery-option"
+            data-product-id="${matchingProduct.id}"
+            data-delivery-option-id="${deliveryOption.id}">
             <input type="radio"
             ${isChecked ? 'checked' :''}
             class="delivery-option-input"
@@ -147,4 +149,11 @@ document.querySelectorAll('.js-save-link')
             updateCheckoutHeader();
             document.querySelector(`.js-quantity-label-${productId}`).innerHTML = newQuantity;
         })
+    });
+document.querySelectorAll('.js-delivery-option')
+    .forEach((element) => {
+      element.addEventListener('click', () => {
+        const {productId, deliveryOptionId} = element.dataset;
+        updateDeliveryOption(productId, deliveryOptionId);
+              });
     });
