@@ -27,7 +27,7 @@ export function renderOrderSummary()
             js-cart-item-container
             js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
-                Delivery date: ${dateString};
+                Delivery date: ${dateString}
             </div>
 
             <div class="cart-item-details-grid">
@@ -153,4 +153,18 @@ export function renderOrderSummary()
             renderPaymentSummary();
             });
     });
+    if(cart.length===0)
+    {
+        let noitemHTML=`
+            <div>
+                <p>Your Cart is Empty</p>
+                <button class="js-view-products view-products button-primary">View Products</button>
+            </div>
+        `;
+        document.querySelector('.js-order-summary').innerHTML=noitemHTML;
+        document.querySelector('.js-view-products').addEventListener('click',()=>{
+            window.location.href="amazon.html"
+        })
+    }
+    console.log(cart)
 }

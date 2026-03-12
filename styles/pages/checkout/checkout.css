@@ -225,3 +225,8 @@
 {
   display: none;
 }
+.view-products{
+  margin-top: 12px;
+  padding: 10px 20px;
+  font-weight:300;
+}
