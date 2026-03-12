@@ -1,0 +1,43 @@
+This happens because of how JavaScript files are shared across multiple HTML pages. If you have a line like <script src="scripts/amazon.js" type="module"></script> in your tracking.html file, the browser executes everything inside amazon.js as soon as the tracking page loads.
+
+Here are the two specific reasons your code is trying to run where it doesn't belong:
+
+1. Global Function Calls
+If you have a function call sitting at the bottom of amazon.js (outside of any function), it runs automatically on every page that imports that script.
+
+JavaScript
+// Inside amazon.js
+export function renderProductsGrid() { 
+  /* code to find .js-products-grid */ 
+}
+
+// If this line is here, it runs on EVERY page, even tracking.html
+renderProductsGrid(); 
+2. The "Shared Script" Problem
+In the SuperSimpleDev tutorial (and many web projects), amazon.js contains the logic for the main product page. However, you often export functions like updateCartQuantity from it to use elsewhere.
+
+When tracking.js does this:
+import { updateCartQuantity } from "./amazon.js";
+
+The browser fetches the entire amazon.js file. If there is code in amazon.js that isn't wrapped in a function—or if there's an event listener or a function call that executes immediately—it will attempt to run on tracking.html.
+
+How to organize it properly
+To stop scripts from "bleeding" into pages where they don't belong, you have two main options:
+
+Option A: The Guard Clause (Quickest Fix)
+As we discussed, check if the element exists before doing anything:
+if (!productsGrid) return;
+
+Option B: Separate your Logic
+Move shared functions (like updateCartQuantity) into a separate file called utils.js or shared.js.
+
+amazon.js: Only contains code for the home page grid.
+
+tracking.js: Only contains code for the tracking page.
+
+utils.js: Contains the cart quantity logic that both pages need.
+
+Why didn't this happen before?
+Usually, this error pops up the moment you move from a single-page project to a multi-page project. On amazon.html, the element .js-products-grid exists, so the code is happy. On tracking.html, that element is missing, so querySelector returns null, and trying to set .innerHTML on null is like trying to paint a wall that isn't there.
+
+Would you like me to show you how to move the shared code into a separate file to keep your project clean?

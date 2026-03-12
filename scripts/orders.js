@@ -3,6 +3,8 @@ import formatCurrency from "./utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 import { getProduct,loadProductsFetch } from "../data/products.js";
 import { addToCart } from "../data/cart.js";
+import { updateCartQuantity } from "../data/cart.js";
+updateCartQuantity();3
 async function renderOrderHeader(){
   await loadProductsFetch();
   let orderHTML='';
@@ -84,6 +86,7 @@ async function renderOrderHeader(){
           <img class="buy-again-icon" src="images/icons/buy-again.png">
           <span class="buy-again-message">Buy it again</span>
         `
+        updateCartQuantity();
       },1000)
     })
   })

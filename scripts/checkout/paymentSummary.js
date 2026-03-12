@@ -1,4 +1,4 @@
-import {calculateCartQuantity, cart} from '../../data/cart.js';
+import {calculateCartQuantity, cart,resetCart} from '../../data/cart.js';
 import { getProduct } from '../../data/products.js';
 import formatCurrency from '../utils/money.js';
 import { getDeliveryOption } from '../../data/deliveryOptions.js';
@@ -67,7 +67,9 @@ export function renderPaymentSummary()
             const order= await response.json();
             addOrders(order)
             console.log(order);
-
+            const orders=window.open('orders.html');
+            orders.console.log(order)
+            resetCart();
         } catch(error){
             console.log('Unexpected error. Try again later.')
         }
