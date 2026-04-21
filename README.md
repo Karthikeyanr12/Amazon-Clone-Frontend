@@ -43,7 +43,16 @@ The project helped me gain hands-on experience in building a **complete frontend
 ---
 
 ## 📸 Screenshots
-(Add screenshots of homepage, cart, orders, tracking page)
+
+<img width="1901" height="905" alt="image" src="https://github.com/user-attachments/assets/aba0d143-ffd9-434c-a321-302a093a6037" /><br>
+
+<img width="1899" height="910" alt="image" src="https://github.com/user-attachments/assets/8b2a97a9-e73e-49a6-bfb3-9f7b60f3b1e8" /><br>
+
+<img width="1895" height="831" alt="image" src="https://github.com/user-attachments/assets/04ac2ee9-1fc7-46a1-9b76-73b15caadeda" /><br>
+
+<img width="1914" height="906" alt="image" src="https://github.com/user-attachments/assets/3d5a9e7e-bbf8-4583-94fb-1f0e16100d56" />
+
+
 
 ---
 
