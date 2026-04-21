@@ -95,6 +95,7 @@ export function renderOrderSummary()
                 </div>
             </div>`;
         })
+        console.log(html)
         return html;
     }
 
